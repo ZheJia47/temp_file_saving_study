@@ -1,0 +1,40 @@
+#!/bin/bash
+
+file=$PWD
+
+if [ ${file##*/} == .code_backup ]; then # is this path .code_backup or not   
+    break
+else
+    if [ ${file##*/} == code_backup ]; then # is this path code_backup or not	
+	break
+    elif [ -d code_backup ]; then
+	# move code_backup/files into .code_backup/files 
+	rm -r code_backup 
+	#for filename2 in code_backup/*
+	#do
+	 #   case "$filename2" in
+	#	code_backup/*) mv code_backup/* .code_backup;;           
+	 #   esac
+	#done		
+    fi
+    
+    [ ! -d .code_backup ] && mkdir -p .code_backup
+    
+    for filename in *
+    do
+	ext=${filename##*.}	
+	case "$ext" in
+	    *~) mv *~ .code_backup;;           
+	esac
+    done   
+fi
+
+
+
+
+
+
+
+
+
+
